@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mountain Town Cost-of-Living Calculator</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <header>
+    <h1>Mountain Town Cost-of-Living Calculator</h1>
+    <p class="subtitle">Estimate real living costs in high-cost mountain communities</p>
+  </header>
+
+  <main>
+    <section id="inputs">
+      <h2>Household Information</h2>
+      <form id="colForm">
+        <label for="homeAddress">Home Address</label>
+        <input type="text" id="homeAddress" name="homeAddress" placeholder="Enter home address" required>
+
+        <label for="workAddress">Work Address</label>
+        <input type="text" id="workAddress" name="workAddress" placeholder="Enter work address" required>
+
+        <label for="householdSize">Household Size</label>
+        <select id="householdSize" name="householdSize" required>
+          <option value="" disabled selected>Select size</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5+</option>
+        </select>
+
+        <label for="childrenCount">Number of Children</label>
+        <select id="childrenCount" name="childrenCount">
+          <option value="0">0</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3+</option>
+        </select>
+
+        <!-- Integrated collapsible section -->
+        <div class="collapsible-wrapper">
+          <button type="button" class="collapsible-toggle" aria-expanded="false">
+            Optional: Additional Details ▼
+          </button>
+          <div class="collapsible-content" hidden>
+            <label for="mpg">Vehicle Miles per Gallon (MPG)</label>
+            <input type="number" id="mpg" name="mpg" min="1" placeholder="e.g., 25">
+            <p class="note">Used to estimate annual fuel costs based on travel distance.</p>
+
+            <label for="secondWorkAddress">Second Work Address (optional)</label>
+            <input type="text" id="secondWorkAddress" name="secondWorkAddress" placeholder="Enter second work address if applicable">
+            <p class="note">Only fill out if a second adult in the household works at another location.</p>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-primary">Calculate</button>
+        <button type="reset" class="btn-secondary">Reset</button>
+      </form>
+    </section>
+
+    <section id="results" aria-live="polite">
+      <h2>Estimated Annual Costs</h2>
+      <div class="cards">
+        <div class="card" id="housingCard"><h3>Housing</h3><p>$—</p></div>
+        <div class="card" id="transportCard"><h3>Transportation</h3><p>$—</p></div>
+        <div class="card" id="childcareCard"><h3>Childcare</h3><p>$—</p></div>
+        <div class="card" id="healthCard"><h3>Healthcare</h3><p>$—</p></div>
+        <div class="card" id="foodCard"><h3>Food</h3><p>$—</p></div>
+        <div class="card" id="internetMobileCard"><h3>Internet &amp; Mobile</h3><p>$—</p></div>
+        <div class="card" id="civicCard"><h3>Civic</h3><p>$—</p></div>
+        <div class="card" id="totalCard"><h3>Total</h3><p>$—</p></div>
+      </div>
+      <div class="chart-container">
+        <canvas id="costChart" aria-label="Cost Breakdown Chart"></canvas>
+      </div>
+    </section>
+
+    <section id="income" aria-live="polite">
+      <h2>Required Income Breakdown</h2>
+      <p>This shows how much pre-tax income is needed to cover estimated annual costs.</p>
+      <div class="cards">
+        <div class="card" id="requiredIncomeCard"><h3>Required Pre-Tax Income</h3><p>$—</p></div>
+      </div>
+      <div class="chart-container">
+        <canvas id="incomeChart" aria-label="Required Income Breakdown"></canvas>
+      </div>
+
+      <!-- Nearest amenities (placeholder values) -->
+      <section id="amenities" aria-live="polite" aria-label="Nearest amenities">
+        <h3>Nearest Amenities</h3>
+        <p class="note">Addresses and distances are placeholders for front-end build.</p>
+        <div class="amenities-grid">
+          <div class="card amenity-card" id="amenities-schools">
+            <h4>Schools</h4>
+            <ul class="amenity-list" aria-label="Nearest schools"></ul>
+          </div>
+          <div class="card amenity-card" id="amenities-healthcare">
+            <h4>Healthcare</h4>
+            <ul class="amenity-list" aria-label="Nearest healthcare"></ul>
+          </div>
+          <div class="card amenity-card" id="amenities-work">
+            <h4>Work</h4>
+            <ul class="amenity-list" aria-label="Work addresses"></ul>
+          </div>
+          <div class="card amenity-card" id="amenities-groceries">
+            <h4>Groceries</h4>
+            <ul class="amenity-list" aria-label="Nearest groceries"></ul>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <section id="methodology">
+      <h2>Methodology</h2>
+      <p>Learn more about how costs are calculated and the data sources used:</p>
+      <a href="assests/Mountain Town COL Methodology.pdf" target="_blank" class="btn-primary">View Methodology PDF</a>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Mountain Town COL Project — Designed for accessibility and transparency</p>
+  </footer>
+</body>
+</html>
