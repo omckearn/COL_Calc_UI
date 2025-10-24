@@ -4,6 +4,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const collapsibleContent = document.querySelector('.collapsible-content');
   const chartsById = {};
   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+  
+  // Disclaimer modal elements
+  const disclaimerModal = document.getElementById('disclaimerModal');
+  const disclaimerAccept = document.getElementById('disclaimerAccept');
+  const disclaimerDontShow = document.getElementById('disclaimerDontShow');
+  const disclaimerClose = document.querySelector('#disclaimerModal .modal-close');
 
   function getLegendColor() {
     const bodyColor = getComputedStyle(document.body).color;
@@ -133,6 +139,47 @@ document.addEventListener('DOMContentLoaded', () => {
 
   updateLegendColors();
   prefersDark.addEventListener('change', updateLegendColors);
+
+  // Disclaimer modal behavior
+  const DISMISS_KEY = 'col_demo_disclaimer_ack';
+  function openDisclaimer() {
+    if (!disclaimerModal) return;
+    disclaimerModal.hidden = false;
+    disclaimerModal.classList.add('open');
+    // Focus the primary button for accessibility
+    setTimeout(() => disclaimerAccept?.focus(), 0);
+  }
+
+  function closeDisclaimer() {
+    if (!disclaimerModal) return;
+    disclaimerModal.classList.remove('open');
+    disclaimerModal.hidden = true;
+  }
+
+  // Show on first visit unless previously dismissed
+  try {
+    const dismissed = localStorage.getItem(DISMISS_KEY) === '1';
+    if (!dismissed) openDisclaimer();
+  } catch (_) {
+    // If storage is unavailable, still show the modal
+    openDisclaimer();
+  }
+
+  disclaimerAccept?.addEventListener('click', () => {
+    try {
+      if (disclaimerDontShow?.checked) localStorage.setItem(DISMISS_KEY, '1');
+    } catch (_) { /* ignore */ }
+    closeDisclaimer();
+  });
+
+  disclaimerClose?.addEventListener('click', closeDisclaimer);
+
+  // Close with Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && disclaimerModal?.classList.contains('open')) {
+      closeDisclaimer();
+    }
+  });
 
   // Build placeholder amenities data (front-end only)
   function buildAmenitiesData({ homeAddress, workAddress, secondWorkAddress }) {

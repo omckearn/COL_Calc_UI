@@ -125,5 +125,23 @@
   <footer>
     <p>© 2025 Mountain Town COL Project — Designed for accessibility and transparency</p>
   </footer>
+
+  <!-- Disclaimer Modal -->
+  <div id="disclaimerModal" class="modal-overlay" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="disclaimerTitle">
+      <button type="button" class="modal-close" aria-label="Close disclaimer">×</button>
+      <h3 id="disclaimerTitle">Demo Disclaimer</h3>
+      <p>
+        The numbers shown here are not actual figures and this site is a UI demo only.
+        Results are placeholders for design and interaction purposes.
+      </p>
+      <label class="modal-check">
+        <input type="checkbox" id="disclaimerDontShow"> Don’t show again
+      </label>
+      <div class="modal-actions">
+        <button type="button" id="disclaimerAccept" class="btn-primary">I Understand</button>
+      </div>
+    </div>
+  </div>
 </body>
 </html>

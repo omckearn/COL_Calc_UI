@@ -217,6 +217,70 @@ footer {
   font-size: 0.9rem;
 }
 
+/* disclaimer modal */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  z-index: 1000;
+}
+
+.modal-overlay.open {
+  display: flex;
+}
+
+.modal {
+  background: #ffffff;
+  color: var(--text-color);
+  border-radius: var(--border-radius);
+  width: 100%;
+  max-width: 560px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  padding: 1.25rem 1.25rem 1rem;
+  position: relative;
+}
+
+.modal h3 {
+  margin: 0 0 0.5rem 0;
+}
+
+.modal p {
+  margin: 0 0 0.75rem 0;
+}
+
+.modal-close {
+  position: absolute;
+  top: 0.35rem;
+  right: 0.5rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  color: #666;
+}
+
+.modal-close:hover { color: #000; }
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.modal-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  color: #555;
+}
+
 @media (prefers-color-scheme: dark) {
   body {
     background-color: #1c1c1c;
@@ -268,4 +332,14 @@ footer {
   .amenity-list-item {
     border-bottom: 1px solid #3a3a3a;
   }
+
+  /* modal dark mode */
+  .modal {
+    background: #2a2a2a;
+    color: #eee;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  }
+  .modal-close { color: #bbb; }
+  .modal-close:hover { color: #fff; }
+  .modal-check { color: #ddd; }
 }
