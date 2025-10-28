@@ -54,7 +54,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const secondWorkAddress = document.getElementById('secondWorkAddress')?.value || '';
     const mpg = document.getElementById('mpg')?.value || '';
 
-    const housing = randomCost(18000, 36000);
+    // Fix housing (rent) at $3,314 per month for the demo
+    const housing = 3314 * 12; // annualized
     const transport = randomCost(5000, 12000);
     const childcare = randomCost(3000, 10000);
     const healthcare = randomCost(2000, 6000);
@@ -87,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
     drawChart('incomeChart', ['After-Tax Income', 'Taxes (Estimated)'],
       [total, requiredIncome - total], incomeColors);
 
-    // Render amenities section with placeholder data
+    // Render amenities section with demo-specific data
     const amenitiesData = buildAmenitiesData({ homeAddress, workAddress, secondWorkAddress });
     renderAmenities(amenitiesData);
   });
@@ -181,28 +182,27 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Build placeholder amenities data (front-end only)
+  // Build demo-specific amenities data (front-end only)
   function buildAmenitiesData({ homeAddress, workAddress, secondWorkAddress }) {
     const schools = [
-      { type: 'Elementary School', name: 'Aspen Ridge Elementary', address: '123 Pine St', distance: '0.8 mi' },
-      { type: 'Middle School', name: 'Timber Creek Middle', address: '456 Cedar Ave', distance: '1.4 mi' },
-      { type: 'High School', name: 'Summit View High', address: '789 Alpine Rd', distance: '2.3 mi' },
-      { type: 'Daycare', name: 'Little Peaks Daycare', address: '22 Spruce Ln', distance: '0.6 mi' },
+      { type: 'Elementary School', name: 'Crystal River Elementary School', address: '160 Snowmass Dr, Carbondale, CO 81623', distance: '0.3 mi' },
+      { type: 'Middle School', name: 'Carbondale Middle School', address: '180 Snowmass Dr, Carbondale, CO 81623', distance: '0.2 mi' },
+      { type: 'High School', name: 'Bridges High School', address: '444 Weant Blvd, Carbondale, CO 81623', distance: '0.4 mi' },
     ];
 
     const healthcare = [
-      { type: 'Clinic', name: 'Mountainview Clinic', address: '45 Creek Rd', distance: '1.2 mi' },
-      { type: 'Hospital', name: 'St. Elias Hospital', address: '900 Summit Blvd', distance: '6.5 mi' },
+      { type: 'Hospital', name: 'Valley View Hospital', address: '1906 Blake Ave, Glenwood Springs, CO 81601', distance: '12.8 mi' },
+      { type: 'Clinic', name: 'Castle Valley Childrens Clinic', address: '2615 Dolores Way #103, Carbondale, CO 81623', distance: '1.9 mi' },
     ];
 
     const work = [
-      workAddress ? { type: 'Primary Workplace', name: workAddress, address: workAddress, distance: '2.1 mi' } : null,
-      secondWorkAddress ? { type: 'Secondary Workplace', name: secondWorkAddress, address: secondWorkAddress, distance: '7.5 mi' } : null,
-    ].filter(Boolean);
+      { type: 'Primary Workplace', name: 'The Hoffmann Hotel', address: '30 Kodiak Drive, Basalt, CO 81621', distance: '8.2 mi' },
+      { type: 'Secondary Workplace', name: 'Pitkin County Airport', address: '233 Airport Rd, Aspen, CO 81611', distance: '25 mi' },
+    ];
 
     const groceries = [
-      { type: 'Grocery', name: 'Valley Market', address: '301 Ridge St', distance: '1.0 mi' },
-      { type: 'Grocery', name: 'Summit Foods', address: '88 Canyon Dr', distance: '2.8 mi' },
+      { type: 'Grocery', name: 'City Market', address: '905 CO-133, Carbondale, CO 81623', distance: '1.2 mi' },
+      { type: 'Grocery', name: 'Mana Foods', address: '792 CO-133, Carbondale, CO 81623', distance: '1.3 mi' },
     ];
 
     return { schools, healthcare, work, groceries };
